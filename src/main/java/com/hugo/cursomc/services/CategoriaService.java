@@ -22,9 +22,17 @@ public class CategoriaService {
 		"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 		}
 	
-	
+	//Salvar
 	public Categoria insert(Categoria obj) {
+		//Se o obj for nullo insere um nod obj com id
 		obj.setId(null);
+		return repo.save(obj);
+	}
+	
+	//Atualizar
+	public Categoria update(Categoria obj) {
+		//Verifica se o id existe, se nao existe ele lança uma exception do metodo find() acima
+		find(obj.getId());
 		return repo.save(obj);
 	}
 
