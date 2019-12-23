@@ -36,12 +36,14 @@ public class CategoriaService {
 		return repo.save(obj);
 	}
 	
+		
 	//Atualizar
-	public Categoria update(Categoria obj) {
-		//Verifica se o id existe, se nao existe ele lança uma exception do metodo find() acima
-		find(obj.getId());
-		return repo.save(obj);
-	}
+			public Categoria update(Categoria obj) {
+				//Verifica se o id existe, se nao existe ele lança uma exception do metodo find() acima
+				Categoria newObj = find(obj.getId());
+				updateData(newObj, obj);
+				return repo.save(newObj);
+			}
 	
 	//Deletar
 	public void delete(Integer id) {
@@ -71,6 +73,10 @@ public class CategoriaService {
 	public Categoria fromDTO(CategoriaDTO objDto) {
 		return new Categoria(objDto.getId(), objDto.getNome());
 	}
-
+	
+	private void updateData (Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());
+		
+	}
 }
 
