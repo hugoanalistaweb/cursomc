@@ -33,20 +33,28 @@ public class ItemPedido  implements Serializable {
 		this.preco = preco;
 	}
 	
+	//metodo responsavel por fazer a soma do subtotal dos itens de pedido e enviar para a classe "Pedido"
 	public double getSubtotal() {
 		return (preco - desconto) * quantidade;
 	}
+	
 	
 	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
 	}
 	
+	public void setPedido(Pedido pedido) {
+		id.setPedido(pedido);
+	}
 	
 	public Produto getProduto() {
 		return id.getProduto();
 	}
 	
+	public void setProduto(Produto produto) {
+		id.setProduto(produto);
+	}
 	
 	@Override
 	public int hashCode() {

@@ -20,9 +20,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
@@ -30,24 +30,20 @@ public class Pedido implements Serializable {
 	
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
 	private Pagamento pagamento;
-	
+
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	
-	
 	@ManyToOne
 	@JoinColumn(name="endereco_de_entrega_id")
 	private Endereco enderecoDeEntrega;
-
-	//Aqui eu faço associação entre Pedido e Produto com ItemPedido
+	
 	@OneToMany(mappedBy="id.pedido")
 	private Set<ItemPedido> itens = new HashSet<>();
 	
 	public Pedido() {
-		
 	}
-
 
 	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
 		super();
@@ -56,69 +52,58 @@ public class Pedido implements Serializable {
 		this.cliente = cliente;
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
-	
-	//Pega o subtotal de ItemPedido e soma todos para ter o valor total
+
 	public double getValorTotal() {
 		double soma = 0.0;
-		for(ItemPedido ip : itens) {
+		for (ItemPedido ip : itens) {
 			soma = soma + ip.getSubtotal();
 		}
 		return soma;
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
-
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
 	public Date getInstante() {
 		return instante;
 	}
-
 
 	public void setInstante(Date instante) {
 		this.instante = instante;
 	}
 
-
 	public Pagamento getPagamento() {
 		return pagamento;
 	}
-
 
 	public void setPagamento(Pagamento pagamento) {
 		this.pagamento = pagamento;
 	}
 
-
 	public Cliente getCliente() {
 		return cliente;
 	}
-
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
-
 	public Endereco getEnderecoDeEntrega() {
 		return enderecoDeEntrega;
 	}
 
-
 	public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
-	
+
 	public Set<ItemPedido> getItens() {
 		return itens;
 	}
-
 
 	public void setItens(Set<ItemPedido> itens) {
 		this.itens = itens;
