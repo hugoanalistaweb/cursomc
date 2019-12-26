@@ -41,10 +41,8 @@ public class Produto implements Serializable {
 	private Set<ItemPedido> itens = new HashSet<>();
 	
 	public Produto() {
-		
-		
+			
 	}
-
 
 	public Produto(Integer id, String nome, Double preco) {
 		super();
